@@ -2,7 +2,7 @@
 
 Proyecto de Machine Learning con PySpark cuyo objetivo es evaluar si la selección de características mejora el rendimiento (o lo mantiene) de una Regresión Logística para predecir la suscripción a un depósito bancario (`deposit`).
 
-Se trabaja sobre el dataset bancario del Assignment 1, convertido a CSV y cargado en Spark (Colab o Databricks) para construir pipelines completos de preprocesado, selección de variables y modelado.
+Se trabaja sobre el dataset bancario `bank_23.pkl`, convertido a CSV y cargado en Spark (Colab) para construir pipelines completos de preprocesado, selección de variables y modelado.
 
 ## Enfoques evaluados
 
