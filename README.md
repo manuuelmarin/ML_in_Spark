@@ -1,34 +1,34 @@
 # ML in Spark
 
-Proyecto de Machine Learning con PySpark cuyo objetivo es evaluar si la selección de características mejora el rendimiento (o lo mantiene) de una Regresión Logística para predecir la suscripción a un depósito bancario (`deposit`).
+Machine Learning project with PySpark whose goal is to evaluate whether feature selection improves the performance (or at least maintains it) of a Logistic Regression model used to predict subscription to a bank deposit (`deposit`).
 
-Se trabaja sobre el dataset bancario `bank_23.pkl`, convertido a CSV y cargado en Spark (Colab) para construir pipelines completos de preprocesado, selección de variables y modelado.
+The work is based on the bank dataset `bank_23.pkl`, converted to CSV and loaded into Spark (Colab) to build full pipelines for preprocessing, feature selection, and modeling.
 
-## Enfoques evaluados
+## Evaluated approaches
 
-Se comparan cuatro estrategias:
+Four strategies are compared:
 
-- LR sin selección de características (baseline).  
-- LR + `UnivariateFeatureSelector` (modo **fpr**, menos conservador).  
-- LR + `UnivariateFeatureSelector` (modo **fwe**, más conservador).  
-- LR + `UnivariateFeatureSelector` seleccionando el **25%** de las características.
+- Logistic Regression without feature selection (baseline).  
+- Logistic Regression + `UnivariateFeatureSelector` (**fpr** mode, less conservative).  
+- Logistic Regression + `UnivariateFeatureSelector` (**fwe** mode, more conservative).  
+- Logistic Regression + `UnivariateFeatureSelector` selecting the **top 25%** of features.
 
-En todos los casos se usa una partición train/validation y se mide el rendimiento con AUC-ROC, analizando el compromiso entre número de variables y desempeño del modelo.
+In all cases, a train/validation split is used and performance is measured with AUC-ROC, analyzing the trade-off between the number of features and model performance.
 
-## Contenido del repositorio
+## Repository contents
 
 - `Assignment.ipynb`  
-  Notebook único del proyecto. Incluye:
-  - Montaje de Google Drive (en Colab) y acceso al CSV bancario.  
-  - Creación de la sesión de Spark y carga del dataset con `spark.read.csv`.  
-  - Definición de variables numéricas y categóricas.  
-  - Pipeline común de preprocesado: `StringIndexer` y `OneHotEncoder` para categóricas, `VectorAssembler` para `features`, e indexación de `deposit` en `label`.  
-  - División en entrenamiento y validación.  
-  - Definición de dos modelos de `LogisticRegression` (con y sin selección de características).  
-  - Construcción de cuatro pipelines (baseline, FPR, FWE, Top 25%).  
-  - Evaluación con `BinaryClassificationEvaluator` (AUC-ROC) y análisis del número de características seleccionadas.  
-  - Gráfico que muestra el trade-off entre complejidad (número de features) y rendimiento (AUC).  
-  - Extracción e interpretación de las características seleccionadas por el mejor selector.
+  Single notebook for the project. It includes:
+  - Mounting Google Drive (in Colab) and accessing the bank CSV.  
+  - Creation of the Spark session and dataset loading with `spark.read.csv`.  
+  - Definition of numerical and categorical variables.  
+  - Common preprocessing pipeline: `StringIndexer` and `OneHotEncoder` for categorical variables, `VectorAssembler` for `features`, and indexing of `deposit` into `label`.  
+  - Train/validation split.  
+  - Definition of two `LogisticRegression` models (with and without feature selection).  
+  - Construction of four pipelines (baseline, FPR, FWE, Top 25%).  
+  - Evaluation with `BinaryClassificationEvaluator` (AUC-ROC) and analysis of the number of selected features.  
+  - Plot showing the trade-off between complexity (number of features) and performance (AUC).  
+  - Extraction and interpretation of the feature names selected by the best-performing selector.
 
-- `bank_23.pkl`
- Dataset utilizado. La extracción del mismo se hizo desde Drive, por lo que si se busca replicar el procedimiento se debe adaptar el primer bloque de código.
+- `bank_23.pkl`  
+  Dataset used. It is originally loaded from Google Drive, so to fully reproduce the workflow, the first code block must be adapted to the user’s own storage configuration.
